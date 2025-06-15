@@ -1,16 +1,57 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule],
+  animations: [
+    trigger('fadeInUp', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate(
+          '0.6s ease-out',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+    ]),
+    trigger('staggerFadeIn', [
+      transition('* => *', [
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateY(20px)' }),
+            stagger('200ms', [
+              animate(
+                '0.6s ease-out',
+                style({ opacity: 1, transform: 'translateY(0)' })
+              ),
+            ]),
+          ],
+          { optional: true }
+        ),
+      ]),
+    ]),
+
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  bgImages: string[] = ['here-bg.jpg', 'heart.jpg', 'wellness.jpg', 'drinking.jpg'];
+  bgImages: string[] = [
+    'here-bg.jpg',
+    'heart.jpg',
+    'wellness.jpg',
+    'drinking.jpg',
+  ];
   currentImageIndex = 0;
   currentBgImage = this.bgImages[0];
   intervalId: any;
@@ -40,38 +81,25 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   activeFAQ: number | null = null;
 
-  toggleFAQ(index: number): void {
-    this.activeFAQ = this.activeFAQ === index ? null : index;
+  ngOnInit() {
+    this.startImageRotation();
   }
 
-  contactForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.contactForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required],
-    });
-  }
-
-  onSubmit() {
-    if (this.contactForm.valid) {
-      console.log('Contact form submitted:', this.contactForm.value);
-      alert('Your message has been sent! Thank you.');
-      this.contactForm.reset();
-    } else {
-      this.contactForm.markAllAsTouched();
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
-  ngOnInit(): void {
+
+  startImageRotation() {
     this.intervalId = setInterval(() => {
       this.currentImageIndex =
         (this.currentImageIndex + 1) % this.bgImages.length;
       this.currentBgImage = this.bgImages[this.currentImageIndex];
-    }, 3000); // change every 3 seconds
+    }, 5000);
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId);
+  toggleFAQ(index: number): void {
+    this.activeFAQ = this.activeFAQ === index ? null : index;
   }
 }

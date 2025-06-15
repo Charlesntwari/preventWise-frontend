@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-predict-diabetes',
@@ -44,7 +45,11 @@ export class PredictDiabetesComponent {
 
   activeFAQ: number | null = null;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.diabetesForm = this.fb.group({
       pregnancies: [null, [Validators.required]],
       glucose: [null, [Validators.required]],
@@ -66,7 +71,8 @@ export class PredictDiabetesComponent {
         )
         .subscribe({
           next: (response) => {
-            this.diabetesResult = response;
+            localStorage.setItem('diabetes_result', JSON.stringify(response));
+            this.router.navigate(['/results']);
           },
           error: (error) => {
             console.error('Error:', error);
@@ -81,4 +87,3 @@ export class PredictDiabetesComponent {
     this.activeFAQ = this.activeFAQ === index ? null : index;
   }
 }
-

@@ -1,56 +1,11 @@
 <!-- Hero Section -->
-<header class="fixed top-0 left-0 w-full bg-[#052649] text-white shadow z-50">
-  <div class="container mx-2 px-4 py-4 flex justify-between items-center">
-    <div class="flex items-center space-x-3">
-      <img
-        src="logo.png"
-        alt="Health App Logo"
-        class="w-10 h-10 rounded-full object-cover"
-      />
-      <h1 class="text-2xl font-bold font-sans">PreventWise</h1>
-    </div>
-
-    <nav class="hidden md:flex space-x-6 text-sm font-medium">
-      <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
-      <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-      <a href="/predict/diabetes" class="hover:text-blue-400 transition-colors"
-        >Diabetes</a
-      >
-      <a href="/predict/heart" class="hover:text-blue-400 transition-colors"
-        >Heart</a
-      >
-      <a href="#cta" class="hover:text-blue-400 transition-colors">Contact</a>
-    </nav>
-
-    <!-- Mobile Menu Icon (optional) -->
-    <div class="md:hidden">
-      <button class="focus:outline-none">
-        <!-- Icon placeholder (e.g., menu icon) -->
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
-    </div>
-  </div>
-</header>
 <section
   id="home"
-  class="relative bg-cover mt-12 bg-center h-[70vh] text-white flex items-center justify-center transition-all duration-1000 ease-in-out"
+  class="relative bg-cover bg-center h-[70vh] text-white flex items-center justify-center transition-all duration-1000 ease-in-out"
   [style.backgroundImage]="'url(' + currentBgImage + ')'"
 >
   <div class="bg-black/60 absolute inset-0 z-0"></div>
-  <div class="z-10 text-center max-w-2xl px-4">
+  <div class="z-10 text-center max-w-2xl px-4" @fadeInUp>
     <h1 class="text-4xl md:text-5xl font-bold leading-tight">
       Predict Non-Communicable Diseases Early
     </h1>
@@ -68,7 +23,11 @@
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-12 px-6 md:my-12 md:px-12 text-gray-800">
+<section
+  id="about"
+  class="py-12 px-6 md:my-12 md:px-12 text-gray-800"
+  @fadeInUp
+>
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-bold">What Are Non-Communicable Diseases?</h2>
     <p class="mt-4 text-lg">
@@ -78,13 +37,12 @@
     </p>
   </div>
 </section>
+
 <section class="bg-white py-16 px-6 lg:px-32 text-gray-800 font-sans">
   <div class="max-w-7xl mx-auto space-y-16">
     <!-- Heading -->
-    <div class="text-center">
-      <h2
-        class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 animate-fade-in-down"
-      >
+    <div class="text-center" @fadeInUp>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
         About Us
       </h2>
       <p class="text-lg md:text-xl text-gray-600">
@@ -94,7 +52,7 @@
 
     <!-- Our Mission -->
     <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
-      <div>
+      <div class="order-2 md:order-1">
         <h3
           class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
         >
@@ -123,7 +81,7 @@
       <img
         src="mission.jpg"
         alt="Mission Image"
-        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-1 md:order-2"
       />
     </div>
 
@@ -132,9 +90,9 @@
       <img
         src="vision.jpg"
         alt="Tech Stack"
-        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-1 md:order-2"
       />
-      <div>
+      <div class="order-2 md:order-1">
         <h3
           class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
         >
@@ -186,7 +144,7 @@
           Meet the Developer
         </h3>
         <p class="text-gray-700 text-lg leading-relaxed">
-          Hi, I’m <strong>[Your Name]</strong>, a passionate software developer
+          Hi, I'm <strong>[Your Name]</strong>, a passionate software developer
           focused on using technology to solve real-world problems. I led this
           6-month project as part of my final year to explore how AI and
           healthcare can work together to make a difference.
@@ -197,44 +155,16 @@
         alt="Developer Photo"
         class="rounded-full shadow-md w-64 h-64 object-cover mx-auto"
       />
-    </div> 
+    </div>
   </div>
 </section>
 
 <!-- Services / Predictions Section -->
 <section id="predictions" class="py-12 px-6 md:px-12 bg-white">
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-bold mb-10">Available Predictions</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <h2 class="text-3xl font-bold mb-10" @fadeInUp>Available Predictions</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" @staggerFadeIn>
       <div
-        class="p-6 bg-blue-50 rounded-xl shadow-md hover:shadow-lg transition"
-      >
-        <h3 class="text-xl font-semibold">🩺 Diabetes Prediction</h3>
-        <p class="mt-2">
-          Estimate your risk of developing diabetes using key health metrics.
-        </p>
-        <a
-          href="predict/diabetes"
-          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
-        >
-          Predict Now
-        </a>
-      </div>
-      <div
-        class="p-6 bg-pink-50 rounded-xl shadow-md hover:shadow-lg transition"
-      >
-        <h3 class="text-xl font-semibold">❤️ Heart Disease Prediction</h3>
-        <p class="mt-2">
-          Check if you may be at risk for cardiovascular conditions.
-        </p>
-        <a
-          href="predict/heart"
-          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
-        >
-          Predict Now
-        </a>
-      </div>
-            <div
         class="p-6 bg-blue-50 rounded-xl shadow-md hover:shadow-lg transition"
       >
         <h3 class="text-xl font-semibold">🩺 Diabetes Prediction</h3>
@@ -266,103 +196,49 @@
   </div>
 </section>
 
-<div class="bg-gray-50 min-h-screen px-4 py-10">
-  <!-- Section Title -->
-  <!-- <h2 class="text-3xl text-center font-bold mb-10">Frequently Asked Questions (FAQs) & Contact Us</h2> -->
+<!-- FAQs Section -->
+<section class="max-w-6xl mx-auto mb-16 px-4 py-10">
+  <h3 class="text-2xl font-bold text-center md:text-3xl mb-6" @fadeInUp>
+    Frequently Asked Questions
+  </h3>
+  <div
+    *ngFor="let faq of faqs; let i = index"
+    class="border-b border-gray-300 mb-4"
+    @staggerFadeIn
+  >
+    <button
+      (click)="toggleFAQ(i)"
+      class="w-full text-left flex justify-between items-center py-3 px-4 focus:outline-none hover:bg-gray-100"
+    >
+      <span class="text-lg font-medium text-gray-800">{{ faq.question }}</span>
+      <svg
+        [ngClass]="{ 'rotate-180': activeFAQ === i }"
+        class="w-5 h-5 text-gray-600 transition-transform duration-300"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        ></path>
+      </svg>
+    </button>
 
-  <!-- FAQs Section -->
-  <section class="max-w-6xl mx-auto mb-16">
-    <h3 class="text-2xl font-bold text-center md:text-3xl mb-6">
-      Frequently Asked Questions
-    </h3>
     <div
-      *ngFor="let faq of faqs; let i = index"
-      class="border-b border-gray-300 mb-4"
+      *ngIf="activeFAQ === i"
+      class="px-4 pb-4 text-gray-700 text-lg duration-300"
     >
-      <button
-        (click)="toggleFAQ(i)"
-        class="w-full text-left flex justify-between items-center py-3 px-4 focus:outline-none hover:bg-gray-100"
-      >
-        <span class="text-lg font-medium text-gray-800">{{
-          faq.question
-        }}</span>
-        <svg
-          [ngClass]="{ 'rotate-180': activeFAQ === i }"
-          class="w-5 h-5 text-gray-600 transition-transform duration-300"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
-        </svg>
-      </button>
-
-      <div
-        *ngIf="activeFAQ === i"
-        class="px-4 pb-4 md:text-lg text-gray-700 transition-all duration-300"
-      >
-        {{ faq.answer }}
-      </div>
+      {{ faq.answer }}
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contact Us Section -->
-  <section class="max-w-6xl mx-auto">
-    <h3 class="text-2xl font-bold md:text-3xl  text-gray-800 mb-6">Contact Us</h3>
-    <form
-      [formGroup]="contactForm"
-      (ngSubmit)="onSubmit()"
-      class="grid grid-cols-1 md:grid-cols-2 md:text-lg gap-4"
-    >
-      <div class="col-span-1">
-        <label class="block text-gray-600 mb-1">Full Name</label>
-        <input
-          formControlName="name"
-          type="text"
-          placeholder="Your Name"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="col-span-1">
-        <label class="block text-gray-600 mb-1">Email</label>
-        <input
-          formControlName="email"
-          type="email"
-          placeholder="you@example.com"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <div class="col-span-2">
-        <label class="block text-gray-600 mb-1">Message</label>
-        <textarea
-          formControlName="message"
-          rows="5"
-          placeholder="Write your message..."
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        ></textarea>
-      </div>
-
-      <div class="col-span-2 text-right">
-        <button
-          type="submit"
-          class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition-all"
-        >
-          📩 Send Message
-        </button>
-      </div>
-    </form>
-  </section>
-</div>
 <!-- Call to Action -->
-<section id="cta" class="bg-blue-50 text-black py-10 text-center">
+<section id="cta" class="bg-blue-50 text-black py-10 text-center" @fadeInUp>
   <h2 class="text-2xl font-bold">Start Taking Control of Your Health</h2>
   <p class="mt-2">
     Your well-being is in your hands. Use our tool to take the first step.

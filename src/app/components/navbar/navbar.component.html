@@ -1,1 +1,107 @@
-<p>navbar works!</p>
+<header class="fixed top-0 left-0 w-full bg-[#052649] text-white shadow z-50">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <!-- Logo and Brand -->
+      <div class="flex items-center space-x-3">
+        <img
+          src="/logo.png"
+          alt="Health App Logo"
+          class="w-10 h-10 rounded-full object-cover"
+        />
+        <a routerLink="/" class="text-2xl font-bold font-sans">PreventWise</a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6 text-sm font-medium">
+        <a routerLink="/" class="hover:text-blue-400 transition-colors">Home</a>
+        <a routerLink="/about" class="hover:text-blue-400 transition-colors"
+          >About</a
+        >
+        <a
+          routerLink="/predict/diabetes"
+          class="hover:text-blue-400 transition-colors"
+          >Diabetes</a
+        >
+        <a
+          routerLink="/predict/heart"
+          class="hover:text-blue-400 transition-colors"
+          >Heart</a
+        >
+        <a routerLink="/contact" class="hover:text-blue-400 transition-colors"
+          >Contact</a
+        >
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        (click)="toggleMenu()"
+        class="md:hidden focus:outline-none"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            *ngIf="!isMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          ></path>
+          <path
+            *ngIf="isMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav [class.hidden]="!isMenuOpen" class="md:hidden mt-4 space-y-2">
+      <a
+        routerLink="/"
+        (click)="closeMenu()"
+        class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        Home
+      </a>
+      <a
+        routerLink="/about"
+        (click)="closeMenu()"
+        class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        About
+      </a>
+      <a
+        routerLink="/predict/diabetes"
+        (click)="closeMenu()"
+        class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        Diabetes
+      </a>
+      <a
+        routerLink="/predict/heart"
+        (click)="closeMenu()"
+        class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        Heart
+      </a>
+      <a
+        routerLink="/contact"
+        (click)="closeMenu()"
+        class="block py-2 px-4 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        Contact
+      </a>
+    </nav>
+  </div>
+</header>
+<!-- Spacer to prevent content from hiding under fixed header -->
+<div class="h-20"></div>
