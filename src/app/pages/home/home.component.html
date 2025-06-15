@@ -1,0 +1,381 @@
+<!-- Hero Section -->
+<header class="fixed top-0 left-0 w-full bg-[#052649] text-white shadow z-50">
+  <div class="container mx-2 px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img
+        src="logo.png"
+        alt="Health App Logo"
+        class="w-10 h-10 rounded-full object-cover"
+      />
+      <h1 class="text-2xl font-bold font-sans">PreventWise</h1>
+    </div>
+
+    <nav class="hidden md:flex space-x-6 text-sm font-medium">
+      <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+      <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+      <a href="/predict/diabetes" class="hover:text-blue-400 transition-colors"
+        >Diabetes</a
+      >
+      <a href="/predict/heart" class="hover:text-blue-400 transition-colors"
+        >Heart</a
+      >
+      <a href="#cta" class="hover:text-blue-400 transition-colors">Contact</a>
+    </nav>
+
+    <!-- Mobile Menu Icon (optional) -->
+    <div class="md:hidden">
+      <button class="focus:outline-none">
+        <!-- Icon placeholder (e.g., menu icon) -->
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+<section
+  id="home"
+  class="relative bg-cover mt-12 bg-center h-[70vh] text-white flex items-center justify-center transition-all duration-1000 ease-in-out"
+  [style.backgroundImage]="'url(' + currentBgImage + ')'"
+>
+  <div class="bg-black/60 absolute inset-0 z-0"></div>
+  <div class="z-10 text-center max-w-2xl px-4">
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+      Predict Non-Communicable Diseases Early
+    </h1>
+    <p class="mt-4 text-lg">
+      Use our AI-powered tool to assess your risk of diabetes, heart disease,
+      and more.
+    </p>
+    <a
+      href="#predictions"
+      class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+    >
+      Start Predictions
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-12 px-6 md:my-12 md:px-12 text-gray-800">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold">What Are Non-Communicable Diseases?</h2>
+    <p class="mt-4 text-lg">
+      NCDs like diabetes, cardiovascular diseases, cancers, and chronic
+      respiratory diseases are not passed from person to person. Early detection
+      is key to managing these conditions effectively.
+    </p>
+  </div>
+</section>
+<section class="bg-white py-16 px-6 lg:px-32 text-gray-800 font-sans">
+  <div class="max-w-7xl mx-auto space-y-16">
+    <!-- Heading -->
+    <div class="text-center">
+      <h2
+        class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 animate-fade-in-down"
+      >
+        About Us
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600">
+        Empowering Health Decisions with Technology
+      </p>
+    </div>
+
+    <!-- Our Mission -->
+    <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
+      <div>
+        <h3
+          class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
+        >
+          <svg
+            class="w-6 h-6 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 17v-6h13V7H3v10h6z"
+            />
+          </svg>
+          Our Mission
+        </h3>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Developed as a Final Year Project, this platform uses machine learning
+          and data to help users predict their health risks, starting with
+          diabetes. Our mission is to empower people with accessible,
+          data-driven health insights.
+        </p>
+      </div>
+      <img
+        src="mission.jpg"
+        alt="Mission Image"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80"
+      />
+    </div>
+
+    <!-- our Vision -->
+    <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
+      <img
+        src="vision.jpg"
+        alt="Tech Stack"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80"
+      />
+      <div>
+        <h3
+          class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
+        >
+          <svg
+            class="w-6 h-6 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+          Our Vision
+        </h3>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Our vision is to empower individuals with accessible, AI-driven health
+          insights that enable early detection and prevention of
+          non-communicable diseases. We aim to create a world where technology
+          bridges the gap between uncertainty and understanding—giving people
+          the confidence to make informed decisions and take control of their
+          health before conditions become critical.
+        </p>
+      </div>
+    </div>
+
+    <!-- Meet the Developer -->
+    <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
+      <div>
+        <h3
+          class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
+        >
+          <svg
+            class="w-6 h-6 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5.121 17.804A9 9 0 0112 3v0a9 9 0 016.879 14.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          Meet the Developer
+        </h3>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Hi, I’m <strong>[Your Name]</strong>, a passionate software developer
+          focused on using technology to solve real-world problems. I led this
+          6-month project as part of my final year to explore how AI and
+          healthcare can work together to make a difference.
+        </p>
+      </div>
+      <img
+        src="heart.jpg"
+        alt="Developer Photo"
+        class="rounded-full shadow-md w-64 h-64 object-cover mx-auto"
+      />
+    </div> 
+  </div>
+</section>
+
+<!-- Services / Predictions Section -->
+<section id="predictions" class="py-12 px-6 md:px-12 bg-white">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-10">Available Predictions</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+        class="p-6 bg-blue-50 rounded-xl shadow-md hover:shadow-lg transition"
+      >
+        <h3 class="text-xl font-semibold">🩺 Diabetes Prediction</h3>
+        <p class="mt-2">
+          Estimate your risk of developing diabetes using key health metrics.
+        </p>
+        <a
+          href="predict/diabetes"
+          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+        >
+          Predict Now
+        </a>
+      </div>
+      <div
+        class="p-6 bg-pink-50 rounded-xl shadow-md hover:shadow-lg transition"
+      >
+        <h3 class="text-xl font-semibold">❤️ Heart Disease Prediction</h3>
+        <p class="mt-2">
+          Check if you may be at risk for cardiovascular conditions.
+        </p>
+        <a
+          href="predict/heart"
+          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+        >
+          Predict Now
+        </a>
+      </div>
+            <div
+        class="p-6 bg-blue-50 rounded-xl shadow-md hover:shadow-lg transition"
+      >
+        <h3 class="text-xl font-semibold">🩺 Diabetes Prediction</h3>
+        <p class="mt-2">
+          Estimate your risk of developing diabetes using key health metrics.
+        </p>
+        <a
+          href="predict/diabetes"
+          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+        >
+          Predict Now
+        </a>
+      </div>
+      <div
+        class="p-6 bg-pink-50 rounded-xl shadow-md hover:shadow-lg transition"
+      >
+        <h3 class="text-xl font-semibold">❤️ Heart Disease Prediction</h3>
+        <p class="mt-2">
+          Check if you may be at risk for cardiovascular conditions.
+        </p>
+        <a
+          href="predict/heart"
+          class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+        >
+          Predict Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bg-gray-50 min-h-screen px-4 py-10">
+  <!-- Section Title -->
+  <!-- <h2 class="text-3xl text-center font-bold mb-10">Frequently Asked Questions (FAQs) & Contact Us</h2> -->
+
+  <!-- FAQs Section -->
+  <section class="max-w-6xl mx-auto mb-16">
+    <h3 class="text-2xl font-bold text-center md:text-3xl mb-6">
+      Frequently Asked Questions
+    </h3>
+    <div
+      *ngFor="let faq of faqs; let i = index"
+      class="border-b border-gray-300 mb-4"
+    >
+      <button
+        (click)="toggleFAQ(i)"
+        class="w-full text-left flex justify-between items-center py-3 px-4 focus:outline-none hover:bg-gray-100"
+      >
+        <span class="text-lg font-medium text-gray-800">{{
+          faq.question
+        }}</span>
+        <svg
+          [ngClass]="{ 'rotate-180': activeFAQ === i }"
+          class="w-5 h-5 text-gray-600 transition-transform duration-300"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          ></path>
+        </svg>
+      </button>
+
+      <div
+        *ngIf="activeFAQ === i"
+        class="px-4 pb-4 md:text-lg text-gray-700 transition-all duration-300"
+      >
+        {{ faq.answer }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="max-w-6xl mx-auto">
+    <h3 class="text-2xl font-bold md:text-3xl  text-gray-800 mb-6">Contact Us</h3>
+    <form
+      [formGroup]="contactForm"
+      (ngSubmit)="onSubmit()"
+      class="grid grid-cols-1 md:grid-cols-2 md:text-lg gap-4"
+    >
+      <div class="col-span-1">
+        <label class="block text-gray-600 mb-1">Full Name</label>
+        <input
+          formControlName="name"
+          type="text"
+          placeholder="Your Name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="col-span-1">
+        <label class="block text-gray-600 mb-1">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="you@example.com"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div class="col-span-2">
+        <label class="block text-gray-600 mb-1">Message</label>
+        <textarea
+          formControlName="message"
+          rows="5"
+          placeholder="Write your message..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </div>
+
+      <div class="col-span-2 text-right">
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition-all"
+        >
+          📩 Send Message
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+<!-- Call to Action -->
+<section id="cta" class="bg-blue-50 text-black py-10 text-center">
+  <h2 class="text-2xl font-bold">Start Taking Control of Your Health</h2>
+  <p class="mt-2">
+    Your well-being is in your hands. Use our tool to take the first step.
+  </p>
+  <a
+    href="#predictions"
+    class="mt-4 inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-lg hover:bg-blue-400 hover:cursor-pointer hover:text-white hover:transition"
+  >
+    Predict Now
+  </a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-6 text-center text-sm">
+  &copy; 2025 PreventWise. All rights reserved.
+</footer>

@@ -1,0 +1,42 @@
+<div class="max-w-4xl mx-auto mt-10 px-4">
+  <h2 class="text-3xl font-bold text-center text-[#78D5E3] mb-8">🧪 Prediction Results</h2>
+
+  <!-- Diabetes Result -->
+  <div *ngIf="diabetesResult" class="bg-white shadow-lg rounded-xl p-6 mb-8">
+    <h3 class="text-xl font-semibold text-green-700 mb-4">Diabetes Prediction</h3>
+    <p class="text-lg">
+      Result: 
+      <span [ngClass]="{
+        'text-green-600 font-bold': diabetesResult.prediction === 0,
+        'text-red-600 font-bold': diabetesResult.prediction === 1
+      }">
+        {{ diabetesResult.prediction === 1 ? 'Likely Diabetic' : 'Not Diabetic' }}
+      </span>
+    </p>
+    <p *ngIf="diabetesResult.probability" class="text-sm text-gray-600 mt-2">
+      Probability: {{ diabetesResult.probability }}%
+    </p>
+  </div>
+
+  <!-- Heart Disease Result -->
+  <div *ngIf="heartResult" class="bg-white shadow-lg rounded-xl p-6">
+    <h3 class="text-xl font-semibold text-red-700 mb-4">Heart Disease Prediction</h3>
+    <p class="text-lg">
+      Result:
+      <span [ngClass]="{
+        'text-green-600 font-bold': heartResult.prediction === 0,
+        'text-red-600 font-bold': heartResult.prediction === 1
+      }">
+        {{ heartResult.prediction === 1 ? 'At Risk of Heart Disease' : 'No Heart Disease Detected' }}
+      </span>
+    </p>
+    <p *ngIf="heartResult.probability" class="text-sm text-gray-600 mt-2">
+      Probability: {{ heartResult.probability }}%
+    </p>
+  </div>
+
+  <!-- No Result -->
+  <div *ngIf="!diabetesResult && !heartResult" class="text-center text-gray-500 mt-10">
+    <p>No prediction data found. Please run a prediction first.</p>
+  </div>
+</div>
