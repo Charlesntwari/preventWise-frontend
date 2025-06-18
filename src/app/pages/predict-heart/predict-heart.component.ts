@@ -23,27 +23,27 @@ export class PredictHeartComponent {
 
   faqs = [
     {
-      question: '💡 What do the input fields mean?',
+      question: 'What do the input fields mean?',
       answer:
         'Each field corresponds to a medical parameter. For example, "RestingBP" is your resting blood pressure, and "Cholesterol" is your cholesterol level. If unsure, please consult a health professional.',
     },
     {
-      question: '📊 How accurate is the prediction?',
+      question: 'How accurate is the prediction?',
       answer:
         'Our model is trained on standard datasets. While it’s useful for insights, it should not replace medical diagnosis.',
     },
     {
-      question: '🔒 Is my data secure?',
+      question: 'Is my data secure?',
       answer:
         'Yes, your data is only used to make a prediction and is not stored unless needed for research with consent.',
     },
     {
-      question: '🧠 What model is used?',
+      question: 'What model is used?',
       answer:
         'We use a trained machine learning model based on clinical data from reputable datasets such as UCI.',
     },
     {
-      question: '📝 What do the results mean?',
+      question: 'What do the results mean?',
       answer:
         'The result indicates a predicted likelihood of heart disease. 0 = No Heart Disease, 1 = Heart Disease Detected.',
     },
