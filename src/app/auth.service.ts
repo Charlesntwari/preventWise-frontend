@@ -125,4 +125,11 @@ export class AuthService {
     });
     return this.http.post(`${this.apiUrl}/predict/heart`, data, { headers });
   }
+
+  deletePredictionHistory(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.delete(`${this.apiUrl}/history`, { headers });
+  }
 }
