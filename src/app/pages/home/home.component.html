@@ -1,7 +1,7 @@
 <!-- Hero Section -->
 <section
   id="home"
-  class="relative bg-cover bg-center h-[70vh] text-white flex items-center justify-center transition-all duration-1000 ease-in-out"
+  class="relative bg-cover mt-[-20px] bg-center h-[70vh] text-white flex items-center justify-center transition-all duration-1000 ease-in-out"
   [style.backgroundImage]="'url(' + currentBgImage + ')'"
 >
   <div class="bg-black/60 absolute inset-0 z-0"></div>
@@ -51,8 +51,9 @@
     </div>
 
     <!-- Our Mission -->
-    <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
-      <div class="order-2 md:order-1">
+    <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in mt-16">
+      <!-- Text Left on Desktop, Above on Mobile -->
+      <div class="order-1">
         <h3
           class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
         >
@@ -72,27 +73,30 @@
           Our Mission
         </h3>
         <p class="text-gray-700 text-lg leading-relaxed">
-          The objective of the project is to create a machine learning model
-          that can predict NCD diseases from multiple features. This project
-          encompasses preprocessing of data, selection of relevant features,
-          algorithms, training of the model, as well as evaluation of the model.
+          Developed as a Final Year Project, this platform uses machine learning
+          and data to help users predict their health risks, starting with
+          diabetes. Our mission is to empower people with accessible,
+          data-driven health insights.
         </p>
       </div>
+      <!-- Image Right on Desktop, Below on Mobile -->
       <img
         src="mission.jpg"
         alt="Mission Image"
-        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-1 md:order-2"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-2"
       />
     </div>
 
-    <!-- our Vision -->
+    <!-- Our Vision -->
     <div class="grid md:grid-cols-2 gap-10 items-center animate-fade-in">
+      <!-- Image Left on Desktop, Below on Mobile -->
       <img
         src="vision.jpg"
-        alt="Tech Stack"
-        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-1 md:order-2"
+        alt="Vision Image"
+        class="rounded-xl shadow-md object-cover w-full h-64 md:h-80 order-2 md:order-1"
       />
-      <div class="order-2 md:order-1">
+      <!-- Text Right on Desktop, Above on Mobile -->
+      <div class="order-1 md:order-2">
         <h3
           class="text-2xl md:text-3xl font-semibold text-blue-500 mb-4 flex items-center gap-2"
         >

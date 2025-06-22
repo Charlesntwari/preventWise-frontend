@@ -101,4 +101,28 @@ export class AuthService {
     });
     return this.http.get(`${this.apiUrl}/history`, { headers });
   }
+
+  predictStroke(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(`${this.apiUrl}/predict/stroke`, data, { headers });
+  }
+
+  predictDiabetes(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(`${this.apiUrl}/predict`, data, { headers });
+  }
+
+  predictHeart(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(`${this.apiUrl}/predict/heart`, data, { headers });
+  }
 }

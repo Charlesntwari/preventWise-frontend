@@ -6,8 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-predict-heart',
@@ -19,7 +20,6 @@ import { Router } from '@angular/router';
 export class PredictHeartComponent {
   heartForm: FormGroup;
   activeFAQ: number | null = null;
-  heartResult: { prediction: number; result: string } | null = null;
 
   faqs = [
     {
@@ -30,7 +30,7 @@ export class PredictHeartComponent {
     {
       question: 'How accurate is the prediction?',
       answer:
-        'Our model is trained on standard datasets. While it’s useful for insights, it should not replace medical diagnosis.',
+        "Our model is trained on standard datasets. While it's useful for insights, it should not replace medical diagnosis.",
     },
     {
       question: 'Is my data secure?',
@@ -51,48 +51,59 @@ export class PredictHeartComponent {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
+    private authService: AuthService,
+    private toastr: ToastrService,
     private router: Router
   ) {
     this.heartForm = this.fb.group({
-      Age: [null, Validators.required],
-      Sex: [null, Validators.required],
-      ChestPainType: [null, Validators.required],
-      RestingBP: [null, Validators.required],
-      Cholesterol: [null, Validators.required],
-      FastingBS: [null, Validators.required],
-      RestingECG: [null, Validators.required],
-      MaxHR: [null, Validators.required],
-      ExerciseAngina: [null, Validators.required],
-      Oldpeak: [null, Validators.required],
-      ST_Slope: [null, Validators.required],
-      ca: [null, Validators.required],
-      thal: [null, Validators.required],
+      Age: [null, [Validators.required, Validators.min(0)]],
+      Sex: [null, [Validators.required]],
+      ChestPainType: [null, [Validators.required]],
+      RestingBP: [null, [Validators.required, Validators.min(0)]],
+      Cholesterol: [null, [Validators.required, Validators.min(0)]],
+      FastingBS: [null, [Validators.required]],
+      RestingECG: [null, [Validators.required]],
+      MaxHR: [null, [Validators.required, Validators.min(0)]],
+      ExerciseAngina: [null, [Validators.required]],
+      Oldpeak: [null, [Validators.required, Validators.min(0)]],
+      ST_Slope: [null, [Validators.required]],
+      ca: [null, [Validators.required, Validators.min(0), Validators.max(4)]],
+      thal: [null, [Validators.required]],
     });
   }
 
   formatLabel(key: string): string {
-    return key.replace(/([A-Z])/g, ' $1').trim();
+    const formatted = key.replace(/([A-Z])/g, ' $1').trim();
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   }
 
   onSubmit() {
     if (this.heartForm.valid) {
-      this.http
-        .post('http://127.0.0.1:8000/predict/heart', this.heartForm.value)
-        .subscribe(
-          (res: any) => {
-            this.heartResult = {
-              prediction: res.prediction,
-              result:
-                res.prediction === 0
-                  ? 'No Heart Disease Detected'
-                  : 'High Risk of Heart Disease',
-            };
-            localStorage.setItem('heart_result', JSON.stringify(res));
-            this.router.navigate(['/results']);
-          },
-          (err) => console.error('Prediction failed', err)
-        );
+      this.authService.predictHeart(this.heartForm.value).subscribe({
+        next: (response: any) => {
+          const resultText =
+            response.prediction === 0 ? 'Low Risk' : 'High Risk';
+          const heartResult = {
+            prediction: response.prediction,
+            result: resultText,
+            message:
+              resultText === 'Low Risk'
+                ? 'You have a low risk of heart disease. Continue maintaining a healthy lifestyle!'
+                : 'You have a high risk of heart disease. Please consult with a healthcare professional.',
+          };
+
+          // Save to localStorage and navigate
+          localStorage.setItem('heart_result', JSON.stringify(heartResult));
+          this.router.navigate(['/results']);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          this.toastr.error(
+            error.message ||
+              'An error occurred while making the prediction. Please try again.'
+          );
+        },
+      });
     }
   }
 

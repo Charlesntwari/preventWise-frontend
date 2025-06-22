@@ -7,7 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-predict-stroke',
@@ -44,8 +45,9 @@ export class PredictStrokeComponent {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
-    private router: Router
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.strokeForm = this.fb.group({
       age: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
@@ -89,29 +91,28 @@ export class PredictStrokeComponent {
         smoking_status_smokes: formValue.smoking_status === 'smokes' ? 1 : 0,
       };
 
-      this.http
-        .post('http://127.0.0.1:8000/predict/stroke', formData)
-        .subscribe({
-          next: (response: any) => {
-            const result = response.prediction === 0 ? 'Low' : 'High';
-            const strokeResult = {
-              prediction: response.prediction,
-              result: result,
-              message:
-                result === 'Low'
-                  ? 'You have a low risk of stroke. Continue maintaining a healthy lifestyle!'
-                  : 'You have a high risk of stroke. Please consult with a healthcare professional.',
-            };
-            localStorage.setItem('stroke_result', JSON.stringify(strokeResult));
-            this.router.navigate(['/results']);
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            alert(
+      this.authService.predictStroke(formData).subscribe({
+        next: (response: any) => {
+          const result = response.prediction === 0 ? 'Low' : 'High';
+          const strokeResult = {
+            prediction: response.prediction,
+            result: result,
+            message:
+              result === 'Low'
+                ? 'You have a low risk of stroke. Continue maintaining a healthy lifestyle!'
+                : 'You have a high risk of stroke. Please consult with a healthcare professional.',
+          };
+          localStorage.setItem('stroke_result', JSON.stringify(strokeResult));
+          this.router.navigate(['/results']);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          this.toastr.error(
+            error.message ||
               'An error occurred while making the prediction. Please try again.'
-            );
-          },
-        });
+          );
+        },
+      });
     }
   }
 }
