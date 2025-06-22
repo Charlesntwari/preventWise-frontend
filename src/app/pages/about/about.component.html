@@ -1,0 +1,221 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">About PreventWise</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Learn about the diseases we can predict and understand the parameters
+        needed for accurate predictions. Our AI-powered system helps identify
+        early warning signs of diabetes, heart disease, and stroke.
+      </p>
+    </div>
+
+    <!-- Disease Selection Tabs -->
+    <div class="flex flex-wrap justify-center mb-8">
+      <div class="flex space-x-1 bg-white rounded-lg shadow-md p-1">
+        <button
+          *ngFor="let disease of diseases"
+          (click)="selectDisease(disease)"
+          [class]="
+            selectedDisease.id === disease.id
+              ? 'px-6 py-3 rounded-md bg-blue-600 text-white font-medium transition-colors'
+              : 'px-6 py-3 rounded-md text-gray-700 hover:bg-gray-100 font-medium transition-colors'
+          "
+        >
+          {{ disease.name }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Disease Information -->
+    <div class="max-w-6xl mx-auto">
+      <!-- Disease Overview -->
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          {{ selectedDisease.name }}
+        </h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          {{ selectedDisease.description }}
+        </p>
+      </div>
+
+      <!-- Symptoms and Risk Factors -->
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <!-- Symptoms -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <svg
+              class="w-6 h-6 text-red-500 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            Common Symptoms
+          </h3>
+          <ul class="space-y-2">
+            <li
+              *ngFor="let symptom of selectedDisease.symptoms"
+              class="flex items-start"
+            >
+              <span
+                class="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"
+              ></span>
+              <span class="text-gray-700">{{ symptom }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Risk Factors -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <svg
+              class="w-6 h-6 text-orange-500 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            Risk Factors
+          </h3>
+          <ul class="space-y-2">
+            <li
+              *ngFor="let factor of selectedDisease.riskFactors"
+              class="flex items-start"
+            >
+              <span
+                class="w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"
+              ></span>
+              <span class="text-gray-700">{{ factor }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Prediction Parameters -->
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+          <svg
+            class="w-6 h-6 text-blue-500 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            ></path>
+          </svg>
+          Prediction Parameters
+        </h3>
+        <p class="text-gray-600 mb-6">
+          The following parameters are required for accurate
+          {{ selectedDisease.name.toLowerCase() }} prediction. Understanding
+          these parameters helps you provide more accurate information.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div
+            *ngFor="let param of selectedDisease.predictionParams"
+            class="border border-gray-200 rounded-lg p-4"
+          >
+            <h4 class="font-semibold text-gray-900 mb-2">{{ param.name }}</h4>
+            <p class="text-gray-600 text-sm">{{ param.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- External Resources -->
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+          <svg
+            class="w-6 h-6 text-green-500 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+            ></path>
+          </svg>
+          Learn More
+        </h3>
+        <p class="text-gray-600 mb-6">
+          Explore these trusted resources to learn more about
+          {{ selectedDisease.name.toLowerCase() }} prevention, treatment, and
+          management.
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <a
+            *ngFor="let link of selectedDisease.externalLinks"
+            [href]="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <svg
+              class="w-5 h-5 text-blue-500 mr-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              ></path>
+            </svg>
+            <span class="text-gray-900 font-medium">{{ link.name }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="text-center mt-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+          Ready to Get Your Prediction?
+        </h3>
+        <p class="text-gray-600 mb-6">
+          Now that you understand the parameters, you're ready to get an
+          accurate prediction.
+        </p>
+        <a
+          [routerLink]="'/predict/' + selectedDisease.id"
+          class="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+          Get {{ selectedDisease.name }} Prediction
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,18 @@ import { PredictDiabetesComponent } from './pages/predict-diabetes/predict-diabe
 import { PredictStrokeComponent } from './pages/predict-stroke/predict-stroke.component';
 import { ResultsComponent } from './pages/results/results.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.guard';
+import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent },
   { path: 'predict/heart', component: PredictHeartComponent },
   { path: 'predict/diabetes', component: PredictDiabetesComponent },
   { path: 'predict/stroke', component: PredictStrokeComponent },
