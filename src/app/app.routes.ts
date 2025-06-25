@@ -10,6 +10,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { AboutComponent } from './pages/about/about.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard.component';
+import { AdminGuard } from './admin.guard';
+import { AdminLayoutComponent } from './components/admin-layout.component';
+import { AdminDashboardHomeComponent } from './pages/admin-dashboard-home.component';
+import { AdminMessagesComponent } from './pages/admin-messages.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,4 +27,15 @@ export const routes: Routes = [
   { path: 'predict/stroke', component: PredictStrokeComponent },
   { path: 'results', component: ResultsComponent },
   { path: 'contact', component: ContactComponent },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
+    children: [
+      { path: '', component: AdminDashboardHomeComponent },
+      { path: 'manage', component: AdminDashboardComponent },
+      { path: 'messages', component: AdminMessagesComponent },
+      // Add more admin child routes here if needed
+    ],
+  },
 ];

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -81,6 +82,19 @@ export class AuthService {
 
   saveToken(token: string): void {
     localStorage.setItem('authToken', token);
+    // Decode and store user info
+    try {
+      const decoded: any = jwtDecode(token);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          email: decoded.sub,
+          is_admin: decoded.is_admin,
+        })
+      );
+    } catch (e) {
+      localStorage.removeItem('user');
+    }
   }
 
   getToken(): string | null {
@@ -131,5 +145,58 @@ export class AuthService {
       Authorization: `Bearer ${this.getToken()}`,
     });
     return this.http.delete(`${this.apiUrl}/history`, { headers });
+  }
+
+  // Admin: Get all users
+  getAllUsers(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.get(`${this.apiUrl}/admin/users`, { headers });
+  }
+
+  // Admin: Delete a user by ID
+  deleteUser(userId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.delete(`${this.apiUrl}/admin/users/${userId}`, {
+      headers,
+    });
+  }
+
+  // Admin: Get all predictions
+  getAllPredictions(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.get(`${this.apiUrl}/admin/predictions`, { headers });
+  }
+
+  // Admin: Get users with a specific disease
+  getUsersWithDisease(diseaseType: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.get(
+      `${this.apiUrl}/admin/users-with-disease/${diseaseType}`,
+      { headers }
+    );
+  }
+
+  // Admin: Get dashboard stats
+  getAdminStats(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.get(`${this.apiUrl}/admin/stats`, { headers });
+  }
+
+  // Admin: Get all contact messages
+  getAllMessages(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.get(`${this.apiUrl}/admin/messages`, { headers });
   }
 }

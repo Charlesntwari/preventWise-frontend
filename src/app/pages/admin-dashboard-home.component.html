@@ -1,0 +1,64 @@
+<div class="container  mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">Admin Dashboard</h1>
+
+  <!-- Main Stats Row -->
+  <div *ngIf="stats" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-blue-700">
+        {{ stats.total_users }}
+      </div>
+      <div class="text-gray-600 mt-2">Total Users</div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-green-700">
+        {{ stats.total_predictions }}
+      </div>
+      <div class="text-gray-600 mt-2">Total Predictions</div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-indigo-700">
+        {{
+          stats.total_predictions / (stats.total_users || 1) | number : "1.1-2"
+        }}
+      </div>
+      <div class="text-gray-600 mt-2">Average Predictions per User</div>
+    </div>
+  </div>
+
+  <!-- Disease Predictions Row -->
+  <div *ngIf="stats" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-pink-700">
+        {{ stats.diabetes_predictions }}
+      </div>
+      <div class="text-gray-600 mt-2">Diabetes Predictions</div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-purple-700">
+        {{ stats.heart_predictions }}
+      </div>
+      <div class="text-gray-600 mt-2">Heart Disease Predictions</div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+      <div class="text-2xl font-bold text-yellow-700">
+        {{ stats.stroke_predictions }}
+      </div>
+      <div class="text-gray-600 mt-2">Stroke Predictions</div>
+    </div>
+  </div>
+
+  <!-- Pie Chart -->
+  <div class="bg-white rounded-lg shadow p-6 mb-8 flex flex-col items-center">
+    <h2 class="text-xl font-semibold mb-4">Predictions Breakdown</h2>
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [type]="pieChartType"
+      [options]="pieChartOptions"
+      width="300"
+      height="300"
+      style="max-width: 300px; max-height: 300px"
+    >
+    </canvas>
+  </div>
+</div>

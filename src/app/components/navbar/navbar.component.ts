@@ -46,4 +46,13 @@ export class NavbarComponent {
     this.closeMenu();
     this.closeUserDropdown();
   }
+
+  get isAdmin(): boolean {
+    try {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      return user && user.is_admin === 1;
+    } catch {
+      return false;
+    }
+  }
 }

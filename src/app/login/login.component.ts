@@ -39,7 +39,13 @@ export class LoginComponent {
         next: (response) => {
           this.authService.saveToken(response.access_token);
           this.toastr.success('Logged in successfully!');
-          this.router.navigate(['/profile']);
+
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          if (user && user.is_admin === 1) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/profile']);
+          }
         },
         error: (error) => {
           this.toastr.error(error.message || 'Login failed. Please try again.');
