@@ -1,89 +1,92 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-predict-diabetes',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './predict-diabetes.component.html',
-  styleUrl: './predict-diabetes.component.css',
+  styleUrls: ['./predict-diabetes.component.css'],
 })
 export class PredictDiabetesComponent {
   diabetesForm: FormGroup;
-  diabetesResult: { prediction: number; result: string } | null = null;
-
+  activeFAQ: number | null = null;
   faqs = [
     {
-      question: 'What is the purpose of this form?',
+      question: 'What is diabetes?',
       answer:
-        'This form predicts your likelihood of having diabetes based on health metrics like glucose levels, BMI, and age.',
+        'Diabetes is a chronic disease that affects how your body turns food into energy. There are three main types: Type 1, Type 2, and Gestational Diabetes.',
     },
     {
-      question: 'Do I need to provide real medical data?',
+      question: 'How accurate is the prediction?',
       answer:
-        'It is recommended to enter accurate values for better predictions, but the tool is for educational and exploratory purposes only.',
+        'Our diabetes prediction model is trained on a comprehensive dataset of health records and uses various factors to assess risk. While it provides a good indication, it should not replace professional medical advice.',
     },
     {
-      question: 'Is my data stored or shared?',
+      question: 'What should I do if I get a high-risk prediction?',
       answer:
-        'No, your data is sent to the backend for prediction and is not stored or shared anywhere.',
-    },
-    {
-      question: 'Can I use this for medical decisions?',
-      answer:
-        'This is not a diagnostic tool. Please consult with healthcare professionals for medical advice.',
+        'If you receive a high-risk prediction, we recommend consulting with a healthcare professional for a comprehensive evaluation and personalized advice.',
     },
   ];
 
-  activeFAQ: number | null = null;
-
   constructor(
-    private http: HttpClient,
     private fb: FormBuilder,
-    private router: Router
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.diabetesForm = this.fb.group({
-      pregnancies: [null, [Validators.required]],
-      glucose: [null, [Validators.required]],
-      blood_pressure: [null, [Validators.required]],
-      skin_thickness: [null, [Validators.required]],
-      insulin: [null, [Validators.required]],
-      bmi: [null, [Validators.required]],
-      diabetes_pedigree: [null, [Validators.required]],
-      age: [null, [Validators.required]],
+      pregnancies: ['', [Validators.required, Validators.min(0)]],
+      glucose: ['', [Validators.required, Validators.min(0)]],
+      blood_pressure: ['', [Validators.required, Validators.min(0)]],
+      skin_thickness: ['', [Validators.required, Validators.min(0)]],
+      insulin: ['', [Validators.required, Validators.min(0)]],
+      bmi: ['', [Validators.required, Validators.min(0)]],
+      diabetes_pedigree: ['', [Validators.required, Validators.min(0)]],
+      age: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
     });
+  }
+
+  toggleFAQ(index: number): void {
+    this.activeFAQ = this.activeFAQ === index ? null : index;
   }
 
   onSubmit() {
     if (this.diabetesForm.valid) {
-      this.http
-        .post<{ prediction: number; result: string }>(
-          'http://127.0.0.1:8000/predict',
-          this.diabetesForm.value
-        )
-        .subscribe({
-          next: (response) => {
-            localStorage.setItem('diabetes_result', JSON.stringify(response));
-            this.router.navigate(['/results']);
-          },
-          error: (error) => {
-            console.error('Error:', error);
-          },
-        });
-    } else {
-      this.diabetesForm.markAllAsTouched();
+      this.authService.predictDiabetes(this.diabetesForm.value).subscribe({
+        next: (response: any) => {
+          const result = response.prediction === 0 ? 'Negative' : 'Positive';
+          const diabetesResult = {
+            prediction: response.prediction,
+            result: result,
+            message:
+              result === 'Negative'
+                ? 'You have a low risk of diabetes. Continue maintaining a healthy lifestyle!'
+                : 'You have a high risk of diabetes. Please consult with a healthcare professional.',
+          };
+          localStorage.setItem(
+            'diabetes_result',
+            JSON.stringify(diabetesResult)
+          );
+          this.router.navigate(['/results']);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          this.toastr.error(
+            error.message ||
+              'An error occurred while making the prediction. Please try again.'
+          );
+        },
+      });
     }
-  }
-
-  toggleFAQ(index: number) {
-    this.activeFAQ = this.activeFAQ === index ? null : index;
   }
 }

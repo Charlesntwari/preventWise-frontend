@@ -38,30 +38,19 @@
           </p>
         </div>
 
-        <!-- Email Field -->
+        <!-- Username (Email) Display Field -->
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Email</label
+          <label for="useremail" class="block text-sm font-medium text-gray-700"
+            >Your Email</label
           >
           <input
             type="email"
-            id="email"
-            formControlName="email"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            [class.border-red-500]="
-              contactForm.get('email')?.invalid &&
-              contactForm.get('email')?.touched
-            "
+            id="useremail"
+            [value]="userEmail"
+            class="mt-1 block w-full rounded-md border-gray-200 bg-gray-100 shadow-sm cursor-not-allowed"
+            readonly
+            tabindex="-1"
           />
-          <p
-            *ngIf="
-              contactForm.get('email')?.invalid &&
-              contactForm.get('email')?.touched
-            "
-            class="mt-1 text-sm text-red-600"
-          >
-            {{ getErrorMessage("email") }}
-          </p>
         </div>
 
         <!-- Subject Field -->

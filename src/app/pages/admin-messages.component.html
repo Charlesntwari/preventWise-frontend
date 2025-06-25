@@ -1,0 +1,49 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">User Messages</h1>
+  <div *ngIf="loading" class="text-gray-500">Loading...</div>
+  <div *ngIf="!loading && messages.length === 0" class="text-gray-500">
+    No messages found.
+  </div>
+  <div *ngIf="!loading && messages.length > 0">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Name
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Email
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Subject
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Message
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+          >
+            Timestamp
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let msg of messages">
+          <td class="px-6 py-4">{{ msg.name }}</td>
+          <td class="px-6 py-4">{{ msg.email }}</td>
+          <td class="px-6 py-4">{{ msg.subject }}</td>
+          <td class="px-6 py-4">{{ msg.message }}</td>
+          <td class="px-6 py-4">{{ msg.timestamp | date : "medium" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
